@@ -66,39 +66,49 @@ app.post('/api/todolist', function (req, res) {
 
 // Update To-Do Item by ID
 app.put('/api/todolist/:id', function (req, res) { 
-	listItemModel.findById({_id: req.params.id }, function(err, listItem) {
-		if(err) {
-			console.log(err);
-		} else if(listItem) {
-			listItem.task = req.body.task;
-			listItem.complete = req.body.complete;
+	if((req.params.id).match(/^[0-9a-fA-F]{24}$/)) {
+		listItemModel.findById({_id: req.params.id }, function(err, listItem) {
+			if(err) {
+				console.log(err);
+			} else if(listItem) {
+				listItem.task = req.body.task;
+				listItem.complete = req.body.complete;
 
-			listItem.save(function (err, listItem) {
-				if(!err || listItem) {
-					console.log("Updated item!");
-				} else {
-					console.log(err);
-				}
-				return res.send(listItem);
-			});
-		} else {
-			console.log("Failed to update item.");
-			return res.status(404).send("404 - Item Not Found.");
-		}
-	});
+				listItem.save(function (err, listItem) {
+					if(!err || listItem) {
+						console.log("Updated item!");
+					} else {
+						console.log(err);
+					}
+					return res.send(listItem);
+				});
+			} else {
+				console.log("Failed to update item.");
+				return res.status(404).send("404 - Item Not Found.");
+			}
+		});
+	} else {
+		console.log("Failed to update item.");
+		return res.status(404).send("404 - Item Not Found.");
+	}
 });
 
 // Delete To-Do Item by ID
 app.delete('/api/todolist/:id', function (req, res) { 
-	listItemModel.findOneAndRemove({_id: req.params.id }, function(err, listItem) {
-		if(err || !listItem) {
-			console.log("Failed to delete item.");
-			return res.status(404).send("404 - Item Not Found.");
-		} else {
-			console.log("Item Deleted.");
-		}
-		return res.send(listItem);
-	});
+	if((req.params.id).match(/^[0-9a-fA-F]{24}$/)) {
+		listItemModel.findOneAndRemove({_id: req.params.id }, function(err, listItem) {
+			if(err || !listItem) {
+				console.log("Failed to delete item.");
+				return res.status(404).send("404 - Item Not Found.");
+			} else {
+				console.log("Item Deleted.");
+			}
+			return res.send(listItem);
+		});
+	} else { 
+		console.log("Failed to delete item.");
+		return res.status(404).send("404 - Item Not Found.");
+	}
 });
 
 // Start server
