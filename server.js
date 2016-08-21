@@ -17,8 +17,9 @@ var Schema = mongoose.Schema;
 
 // List Item Schema
 var listItem = new Schema({ 
+	id: { type: String, required: false }, 
 	task: { type: String, required: true },
-	complete: { type: Boolean, required: true }
+	complete: { type: Boolean, default: false, required: false }
 });
 
 // Create List Item Model
@@ -37,29 +38,45 @@ app.get('/api', function (req, res) {
 // Obtain full To-Do List
 app.get('/api/todolist', function (req, res) {
 	return listItemModel.find(function (err, toDoList) {
-		if(!err) {
-			return res.send(toDoList);
-		} else { 
+		if(err) {
 			return console.log(err);
 		}
+
+		return res.send(toDoList);
 	});
 });
+
+// Obtain list of completed items
+/*
+app.get('/api/todolist/completed', function (req, res) { 
+	return listItemModel.find(function (err, toDoList) { 
+		if(err) { 
+			return console.log(err);
+		}
+
+		toDoList = toDoList.filter(function(list) { 
+			return (list.complete == true);
+		});
+
+		return res.send(toDoList);
+	});
+});
+*/
 
 // Add To-Do Item
 app.post('/api/todolist', function (req, res) {
 	var listItem;
 	listItem = new listItemModel({
-		//id: req.body.id,
 		task: req.body.task,
 		complete: req.body.complete
 	});
 
 	listItem.save(function (err) {
-		if(!err) { 
-			return console.log("Created Item.");
-		} else { 
-			return console.log(err);
-		}
+		if(err) { 
+			return console.log(err);	
+		} 
+
+		return console.log("Created Item.");
 	});
 	return res.send(listItem);
 });
@@ -75,12 +92,13 @@ app.put('/api/todolist/:id', function (req, res) {
 				listItem.complete = req.body.complete;
 
 				listItem.save(function (err, listItem) {
-					if(!err || listItem) {
+					if(err || !listItem) {
+						console.log("Failed to update item.");
+						return res.status(404).send("404 - Item Not Found.");
+					} else if(listItem) {
 						console.log("Updated item!");
-					} else {
-						console.log(err);
+						return res.send(listItem);
 					}
-					return res.send(listItem);
 				});
 			} else {
 				console.log("Failed to update item.");
