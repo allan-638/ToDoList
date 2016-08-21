@@ -20,7 +20,7 @@ var listItem = new Schema({
 	id: { type: String, required: false }, 
 	task: { type: String, required: true },
 	complete: { type: Boolean, default: false, required: false }
-});
+}, {versionKey: false});
 
 // Create List Item Model
 var listItemModel = mongoose.model('listItem', listItem);
@@ -47,21 +47,34 @@ app.get('/api/todolist', function (req, res) {
 });
 
 // Obtain list of completed items
-/*
-app.get('/api/todolist/completed', function (req, res) { 
+app.get('/api/todolist/complete', function (req, res) { 
 	return listItemModel.find(function (err, toDoList) { 
 		if(err) { 
 			return console.log(err);
 		}
 
-		toDoList = toDoList.filter(function(list) { 
-			return (list.complete == true);
+		toDoList = toDoList.filter(function(processedList){
+			return processedList.complete == true;
 		});
 
 		return res.send(toDoList);
 	});
 });
-*/
+
+// Obtain list of not completed items
+app.get('/api/todolist/incomplete', function (req, res) { 
+	return listItemModel.find(function (err, toDoList) { 
+		if(err) { 
+			return console.log(err);
+		}
+
+		toDoList = toDoList.filter(function(processedList) {
+			return processedList.complete == false;
+		});
+
+		return res.send(toDoList);
+	});
+});
 
 // Add To-Do Item
 app.post('/api/todolist', function (req, res) {
