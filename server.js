@@ -182,6 +182,14 @@ app.delete('/api/todolist/:id', function (req, res) {
 	}
 });
 
+// Only for dev purposes
+app.delete('/api/todolist/', function (req, res) { 
+	return listItemModel.remove({}, function(err) {
+		console.log('All data deleted.');
+		return res.status(200).send("All data deleted.");
+	})
+});
+
 // Start server
 app.listen(port);
 console.log('To-Do List running on port ' + port);
