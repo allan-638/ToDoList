@@ -37,7 +37,7 @@ Use the following endpoint to create a new todo item:
 ```
 http://localhost:8080/api/todolist/
 ```
-- "Task" field is mandatory, "Complete" field is optional and defaults to false
+- "Task" field is mandatory, "Complete" field is optional and defaults to false.
 - Returns the created todo object.
 
 
@@ -47,7 +47,7 @@ Use the following endpoint to update an existing todo item:
 ```
 http://localhost:8080/api/todolist/:id
 ```
-- At least one of the "Task" or "Complete" fields must be present in the request
+- At least one of the "Task" or "Complete" fields must be present in the request.
 - Returns the updated todo object.
 
 
