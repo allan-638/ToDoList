@@ -9,25 +9,25 @@ node server.js
 Finally, go to Postman and you should be able to use the API using:
 
 ## GET
-Use the following endpoint to obtain a FULL list of all todo items:
+1.	Use the following endpoint to obtain a FULL list of all todo items:
 ```
 http://localhost:8080/api/todolist
 ```
-	* Returns an array of todo objects
+..*	Returns an array of todo objects
 
 
-Use the following endpoint to obtain a list of all COMPLETED todo items:
+2.	Use the following endpoint to obtain a list of all COMPLETED todo items:
 ```
 http://localhost:8080/api/todolist/complete/
 ```
-	* Returns an array of todo objects, where complete == true
+..*	Returns an array of todo objects, where complete == true
 
 
-Use the following endpoint to obtain a list of all INCOMPLETE todo items:
+3.	Use the following endpoint to obtain a list of all INCOMPLETE todo items:
 ```
 http://localhost:8080/api/todolist/incomplete/
 ```
-	* Returns an array of todo objects, where complete == false
+..*	Returns an array of todo objects, where complete == false
 
 
 
@@ -36,8 +36,8 @@ Use the following endpoint to create a new todo item:
 ```
 http://localhost:8080/api/todolist/
 ```
-	* "Task" field is mandatory, "Complete" field is optional and defaults to false
-	* Returns the created todo object
+- "Task" field is mandatory, "Complete" field is optional and defaults to false
+- Returns the created todo object
 
 
 
@@ -46,8 +46,8 @@ Use the following endpoint to update an existing todo item:
 ```
 http://localhost:8080/api/todolist/:id
 ```
-	* At least one of the "Task" or "Complete" fields must be present in the request
-	* Returns the updated todo object
+- At least one of the "Task" or "Complete" fields must be present in the request
+- Returns the updated todo object
 
 
 
@@ -56,14 +56,14 @@ Use the following endpoint to delete an existing todo item:
 ```
 http://localhost:8080/api/todolist/:id
 ```
-	* Returns the id of the deleted todo object
+- Returns the id of the deleted todo object
 
 
 To delete ALL todo objects, send a DELETE request to the following endpoint:
 ```
 http://localhost:8080/api/todolist/
 ```
-	* Returns "All data deleted." message
+- Returns "All data deleted." message
 
 ## SERVER CODES
 * 200: successful GET, PUT, or DELETE
