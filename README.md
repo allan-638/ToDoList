@@ -14,7 +14,7 @@ Use the following endpoint to obtain a FULL list of all todo items:
 http://localhost:8080/api/todolist
 ```
 - Returns an array of todo objects.
-
+<br />
 
 Use the following endpoint to obtain a list of all COMPLETED todo items:
 ```
