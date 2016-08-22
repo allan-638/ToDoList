@@ -9,25 +9,25 @@ node server.js
 Finally, go to Postman and you should be able to use the API using:
 
 ## GET
-1.	Use the following endpoint to obtain a FULL list of all todo items:
+Use the following endpoint to obtain a FULL list of all todo items:
 ```
 http://localhost:8080/api/todolist
 ```
-..*	Returns an array of todo objects
+- Returns an array of todo objects.
 
 
-2.	Use the following endpoint to obtain a list of all COMPLETED todo items:
+Use the following endpoint to obtain a list of all COMPLETED todo items:
 ```
 http://localhost:8080/api/todolist/complete/
 ```
-..*	Returns an array of todo objects, where complete == true
+- Returns an array of todo objects, where complete == true.
 
 
-3.	Use the following endpoint to obtain a list of all INCOMPLETE todo items:
+Use the following endpoint to obtain a list of all INCOMPLETE todo items:
 ```
 http://localhost:8080/api/todolist/incomplete/
 ```
-..*	Returns an array of todo objects, where complete == false
+- Returns an array of todo objects, where complete == false.  
 
 
 
