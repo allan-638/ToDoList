@@ -9,20 +9,21 @@ node server.js
 Finally, go to Postman and you should be able to use the API using:
 
 ## GET
+#### Full list of todo items
 Use the following endpoint to obtain a FULL list of all todo items:
 ```
 http://localhost:8080/api/todolist
 ```
 - Returns an array of todo objects.
-<br />
 
+#### List of completed todo items
 Use the following endpoint to obtain a list of all COMPLETED todo items:
 ```
 http://localhost:8080/api/todolist/complete/
 ```
 - Returns an array of todo objects, where complete == true.
 
-
+#### List of incomplete todo items
 Use the following endpoint to obtain a list of all INCOMPLETE todo items:
 ```
 http://localhost:8080/api/todolist/incomplete/
@@ -52,6 +53,7 @@ http://localhost:8080/api/todolist/:id
 
 
 ## DELETE
+#### Delete one todo item
 Use the following endpoint to delete an existing todo item:
 ```
 http://localhost:8080/api/todolist/:id
@@ -59,6 +61,7 @@ http://localhost:8080/api/todolist/:id
 - Returns the id of the deleted todo object
 
 
+#### Delete all todo items
 To delete ALL todo objects, send a DELETE request to the following endpoint:
 ```
 http://localhost:8080/api/todolist/
